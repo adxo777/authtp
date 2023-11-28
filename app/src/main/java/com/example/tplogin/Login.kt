@@ -11,6 +11,7 @@ import com.example.tplogin.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 class Login : AppCompatActivity() {
     lateinit var auth : FirebaseAuth
+
     public override fun onStart() {
         super.onStart()
 // Check if user is signed in (non-null) and update UI accordingly.

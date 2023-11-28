@@ -3,6 +3,7 @@ package com.example.tplogin
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
             DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         initMenu(binding)
+        navigateMenu(navView)
 
 
         auth = FirebaseAuth.getInstance()
@@ -42,6 +44,46 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
     }
+
+
+    private fun navigateMenu(navigationView: NavigationView) {
+        navView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.users -> {
+
+                    val intent = Intent(this, user2::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+
+                R.id.profile -> {
+                    Toast.makeText(
+                        baseContext,
+                        "profile",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                    true
+                }
+
+                R.id.logout -> {
+
+
+                    auth.signOut()
+                    val intent = Intent(this, Login::class.java)
+                    startActivity(intent)
+
+
+                    true
+                }
+                else-> {false}
+            }
+
+
+        }
+
+    }
+
 
     private fun initMenu(binding: ActivityMainBinding) {
 
